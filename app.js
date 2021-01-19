@@ -20,8 +20,10 @@ app.use(express.static("public"));
 let posts = []; //create global variable array to store individual posts
 
 app.get("/", function(req, res){
-  res.render("home", {startingContent: homeStartingContent});
-  console.log(posts);
+  res.render("home", {
+    startingContent: homeStartingContent,
+    posts: posts
+  });
 });
 //first key:value differentiated to help locate errors more easily
 
