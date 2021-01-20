@@ -53,17 +53,18 @@ app.post("/compose", function(req, res){
 });
 
 app.get("/posts/:postName", function(req, res) {
-  const reqTitle = req.params.postName;
+  const reqTitle = _.lowerCase(req.params.postName);
 
   posts.forEach(function(post) {
-    const storedTitle = post.title;
+    const storedTitle = _.lowerCase(post.title);
 
     if (storedTitle === reqTitle) {
-      console.log("Match found!");
-    } else {
-      console.log("Not a match...");
+      res.render("post", {
+        title: post.title,
+        content: post.content
+      });
     }
-  })
+  });
 });
 //Using parameter to tap into dynamic URL
 //One may use more than 1 parameter (:postName/something/:another)
